@@ -567,13 +567,16 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
 
         .routine-tabs {
           display: flex;
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          border-radius: 12px;
+          background: var(--glass-bg);
+          backdrop-filter: blur(var(--glass-blur));
+          -webkit-backdrop-filter: blur(var(--glass-blur));
+          border: 1px solid var(--glass-border);
+          border-radius: 14px;
           padding: 4px;
           gap: 4px;
           min-width: max-content;
           width: 100%;
+          box-shadow: 0 4px 12px var(--glass-shadow);
         }
 
         .routine-tab-btn {
@@ -585,15 +588,19 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
           font-weight: 700;
           font-size: 0.85rem;
           padding: 10px 16px;
-          border-radius: 8px;
+          border-radius: 10px;
           cursor: pointer;
           transition: all 0.2s;
           white-space: nowrap;
         }
 
         .routine-tab-btn.active {
-          background: var(--accent-purple);
-          color: white;
+          background: var(--clay-bg-primary);
+          color: var(--color-on-accent);
+          box-shadow: 
+            0 4px 10px var(--clay-shadow-outer),
+            inset 0 1.5px 3px var(--clay-inner-light),
+            inset 0 -1.5px 3px var(--clay-inner-dark);
         }
 
         .routine-action-buttons {
@@ -607,29 +614,43 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
           padding: 8px;
           font-size: 0.8rem;
           font-weight: 600;
-          border-radius: 8px;
+          border-radius: 10px;
           border: 1px solid var(--border-color);
-          background: var(--bg-secondary);
+          background: var(--clay-bg-neutral);
           color: var(--color-text-secondary);
           cursor: pointer;
           transition: all 0.2s;
+          box-shadow: 
+            0 2px 4px var(--clay-neutral-shadow),
+            inset 0 1px 2px var(--clay-neutral-inner-light),
+            inset 0 -1px 2px var(--clay-neutral-inner-dark);
         }
 
         .btn-routine-action:hover:not(:disabled) {
-          border-color: var(--accent-purple);
-          color: var(--accent-purple);
-          background: var(--accent-purple-glow);
+          border-color: var(--border-hover);
+          background: var(--bg-card-hover);
+          transform: translateY(-1px);
+        }
+
+        .btn-routine-action:active:not(:disabled) {
+          transform: translateY(1px);
+          box-shadow: 
+            0 1px 2px var(--clay-neutral-shadow),
+            inset 0 0.5px 1px var(--clay-neutral-inner-light),
+            inset 0 -0.5px 1px var(--clay-neutral-inner-dark);
         }
 
         .btn-routine-action:disabled {
           opacity: 0.4;
           cursor: not-allowed;
+          box-shadow: none;
         }
 
         .btn-routine-action.delete:hover:not(:disabled) {
           border-color: var(--status-error);
           color: var(--status-error);
           background: rgba(197, 34, 31, 0.05);
+          box-shadow: none;
         }
 
 
