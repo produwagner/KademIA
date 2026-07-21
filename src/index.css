@@ -1,53 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 :root {
   /* Google Material Design 3 Palette (Light Theme) */
-  --bg-primary: #f8f9fa;
+  --bg-primary: #f3f4f6;
   --bg-secondary: #ffffff;
   --bg-card: #ffffff;
   --bg-card-hover: #f1f3f4;
   --border-color: #dadce0;
-  --border-focus: #188038; /* Mapped to Google Green */
+  --border-focus: #008a47; /* Mapped to solid athletic green */
   
   --color-text-primary: #1f1f1f;
   --color-text-secondary: #5f6368;
   --color-text-muted: #80868b;
   
-  /* Google Brand Colors - Green Theme */
-  --accent-purple: #137333; /* Mapped Google Blue to Google Green */
-  --accent-purple-glow: rgba(19, 115, 51, 0.08);
-  --accent-lime: #137333; /* Google Green (Accessibility Safe) */
-  --accent-lime-glow: rgba(19, 115, 51, 0.15);
-  --accent-cyan: #188038; /* Mapped Secondary Blue to Google Green */
+  /* Sports Brand Colors - Green Theme */
+  --accent-purple: #008a47; /* Athletic forest green */
+  --accent-purple-glow: rgba(0, 138, 71, 0.08);
+  --accent-lime: #008a47; 
+  --accent-lime-glow: rgba(0, 138, 71, 0.15);
+  --accent-cyan: #00a857; 
   
-  --status-success: #137333;
+  --status-success: #008a47;
   --status-warning: #e37400;
   --status-error: #c5221f;
   
-  --nav-bg: rgba(255, 255, 255, 0.65);
-  --nav-border: rgba(255, 255, 255, 0.4);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 0, 0, 0.05);
   
-  --border-hover: rgba(19, 115, 51, 0.2);
-  --accent-active: rgba(19, 115, 51, 0.12);
-  --accent-hover: #10602a;
-  --accent-active-color: #0d4f22;
-  --color-on-accent: #ffffff; /* Texto branco no fundo verde escuro */
+  --border-hover: rgba(0, 138, 71, 0.2);
+  --accent-active: rgba(0, 138, 71, 0.12);
+  --accent-hover: #007039;
+  --accent-active-color: #005c2e;
+  --color-on-accent: #ffffff; /* White text on green background */
   
-  --font-title: 'Roboto', 'Inter', sans-serif;
+  --font-title: 'Oswald', 'Roboto', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Glassmorphism Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-bg-hover: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-border-hover: rgba(19, 115, 51, 0.35);
-  --glass-shadow: rgba(31, 38, 135, 0.04);
-  --glass-shadow-hover: rgba(31, 38, 135, 0.08);
+  /* Glassmorphism Tokens (Light Theme with higher opacity) */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-border-hover: rgba(0, 138, 71, 0.35);
+  --glass-shadow: rgba(0, 0, 0, 0.03);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.06);
   --glass-blur: 12px;
 
   /* Claymorphism Tokens */
-  --clay-bg-primary: #137333;
-  --clay-shadow-outer: rgba(19, 115, 51, 0.25);
+  --clay-bg-primary: #008a47;
+  --clay-shadow-outer: rgba(0, 138, 71, 0.25);
   --clay-inner-light: rgba(255, 255, 255, 0.45);
   --clay-inner-dark: rgba(0, 0, 0, 0.18);
   
@@ -57,65 +57,65 @@
   --clay-neutral-inner-dark: rgba(0, 0, 0, 0.07);
 
   /* Deep Background */
-  --bg-radial-1: #eaf2eb;
-  --bg-radial-2: #f8f9fa;
+  --bg-radial-1: #e2e8f0;
+  --bg-radial-2: #f8fafc;
 }
 
 body.dark-theme {
-  /* Google Material Design 3 Palette (Dark Theme) */
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-card: #1e1e1e;
-  --bg-card-hover: #2d2d2d;
-  --border-color: #3c4043;
-  --border-focus: #6dd58c; /* Mapped to Google Light Green */
+  /* High-Performance Dark Theme (Pitch black and dark charcoal backings) */
+  --bg-primary: #08090a;
+  --bg-secondary: #111215;
+  --bg-card: #111215;
+  --bg-card-hover: #1c1d22;
+  --border-color: #22252e;
+  --border-focus: #adff2f; /* Neon Lime green */
   
-  --color-text-primary: #e3e3e3;
-  --color-text-secondary: #c4c7c5;
-  --color-text-muted: #8e918f;
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
   
-  --accent-purple: #6dd58c; /* Mapped Light Google Blue to Google Light Green */
-  --accent-purple-glow: rgba(109, 213, 140, 0.12);
-  --accent-lime: #6dd58c; /* Light Google Green */
-  --accent-lime-glow: rgba(109, 213, 140, 0.15);
-  --accent-cyan: #81c995; /* Mapped Secondary Blue to Light Google Green */
+  --accent-purple: #adff2f; /* Neon Lime */
+  --accent-purple-glow: rgba(173, 255, 47, 0.12);
+  --accent-lime: #adff2f; 
+  --accent-lime-glow: rgba(173, 255, 47, 0.18);
+  --accent-cyan: #c2ff33; 
   
-  --status-success: #6dd58c;
+  --status-success: #adff2f;
   --status-warning: #fdd663;
-  --status-error: #f28b82;
+  --status-error: #f87171;
   
-  --nav-bg: rgba(22, 22, 22, 0.65);
-  --nav-border: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(11, 12, 15, 0.88);
+  --nav-border: rgba(255, 255, 255, 0.06);
   
-  --border-hover: rgba(109, 213, 140, 0.25);
-  --accent-active: rgba(109, 213, 140, 0.2);
-  --accent-hover: #58b375;
-  --accent-active-color: #4fa168;
-  --color-on-accent: #052610; /* Texto verde escuro no fundo verde claro */
+  --border-hover: rgba(173, 255, 47, 0.25);
+  --accent-active: rgba(173, 255, 47, 0.2);
+  --accent-hover: #9ad420;
+  --accent-active-color: #8bbd1c;
+  --color-on-accent: #071200; /* Dark charcoal text for maximum contrast on neon lime */
 
-  /* Glassmorphism Tokens - Dark Theme */
-  --glass-bg: rgba(30, 30, 30, 0.45);
-  --glass-bg-hover: rgba(40, 40, 40, 0.55);
-  --glass-border: rgba(255, 255, 255, 0.07);
-  --glass-border-hover: rgba(109, 213, 140, 0.2);
-  --glass-shadow: rgba(0, 0, 0, 0.25);
-  --glass-shadow-hover: rgba(0, 0, 0, 0.35);
-  --glass-blur: 14px;
+  /* Glassmorphism Tokens - Dark Theme (High contrast opacity) */
+  --glass-bg: rgba(17, 18, 21, 0.88);
+  --glass-bg-hover: rgba(28, 29, 34, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(173, 255, 47, 0.3);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  --glass-shadow-hover: rgba(0, 0, 0, 0.55);
+  --glass-blur: 16px;
 
   /* Claymorphism Tokens - Dark Theme */
-  --clay-bg-primary: #6dd58c;
-  --clay-shadow-outer: rgba(109, 213, 140, 0.22);
-  --clay-inner-light: rgba(255, 255, 255, 0.6);
-  --clay-inner-dark: rgba(0, 0, 0, 0.25);
+  --clay-bg-primary: #adff2f;
+  --clay-shadow-outer: rgba(173, 255, 47, 0.3);
+  --clay-inner-light: rgba(255, 255, 255, 0.7);
+  --clay-inner-dark: rgba(0, 0, 0, 0.35);
   
-  --clay-bg-neutral: #242424;
-  --clay-neutral-shadow: rgba(0, 0, 0, 0.15);
-  --clay-neutral-inner-light: rgba(255, 255, 255, 0.06);
-  --clay-neutral-inner-dark: rgba(0, 0, 0, 0.25);
+  --clay-bg-neutral: #1c1d22;
+  --clay-neutral-shadow: rgba(0, 0, 0, 0.25);
+  --clay-neutral-inner-light: rgba(255, 255, 255, 0.08);
+  --clay-neutral-inner-dark: rgba(0, 0, 0, 0.35);
 
   /* Deep Background */
-  --bg-radial-1: #111813;
-  --bg-radial-2: #121212;
+  --bg-radial-1: #0d0f12;
+  --bg-radial-2: #050607;
 }
 
 * {
