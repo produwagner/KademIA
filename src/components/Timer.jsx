@@ -103,7 +103,7 @@ export default function Timer({ duration, onFinish, onCancel }) {
   const strokeDashoffset = circumference - progress * circumference;
 
   // Minimized pill border progress calculations (Perimeter of 320x54 capsule)
-  const borderCircumference = 699;
+  const borderCircumference = 696;
   const borderStrokeDashoffset = borderCircumference - (timeLeft / duration) * borderCircumference;
 
   // Format time (MM:SS)
@@ -205,25 +205,17 @@ export default function Timer({ duration, onFinish, onCancel }) {
           </div>
 
           {/* Border progress outline */}
-          <svg className="island-border-progress-svg" width="320" height="54">
-            <rect
+          <svg className="island-border-progress-svg" viewBox="0 0 320 54" width="320" height="54">
+            <path
               className="island-border-progress-track"
-              x="0.5"
-              y="0.5"
-              width="319"
-              height="53"
-              rx="26.5"
+              d="M 160 1 H 293 A 26 26 0 0 1 293 53 H 27 A 26 26 0 0 1 27 1 Z"
               fill="none"
             />
-            <rect
+            <path
               className="island-border-progress-rect"
-              x="0.5"
-              y="0.5"
-              width="319"
-              height="53"
-              rx="26.5"
+              d="M 160 1 H 293 A 26 26 0 0 1 293 53 H 27 A 26 26 0 0 1 27 1 Z"
               fill="none"
-              strokeDasharray="699"
+              strokeDasharray="696"
               strokeDashoffset={borderStrokeDashoffset}
             />
           </svg>
@@ -392,7 +384,7 @@ export default function Timer({ duration, onFinish, onCancel }) {
           height: 54px;
           background: rgba(18, 18, 20, 0.8);
           border-radius: 27px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          border: none;
           box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
           backdrop-filter: blur(20px) saturate(190%);
           -webkit-backdrop-filter: blur(20px) saturate(190%);
