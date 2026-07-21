@@ -47,7 +47,7 @@
 
   /* Claymorphism Tokens */
   --clay-bg-primary: #008a47;
-  --clay-shadow-outer: rgba(0, 138, 71, 0.25);
+  --clay-shadow-outer: rgba(0, 0, 0, 0.15);
   --clay-inner-light: rgba(255, 255, 255, 0.45);
   --clay-inner-dark: rgba(0, 0, 0, 0.18);
   
@@ -104,7 +104,7 @@ body.dark-theme {
 
   /* Claymorphism Tokens - Dark Theme */
   --clay-bg-primary: #adff2f;
-  --clay-shadow-outer: rgba(173, 255, 47, 0.3);
+  --clay-shadow-outer: rgba(0, 0, 0, 0.45);
   --clay-inner-light: rgba(255, 255, 255, 0.7);
   --clay-inner-dark: rgba(0, 0, 0, 0.35);
   
