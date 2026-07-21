@@ -570,7 +570,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           gap: 6px;
           font-size: 0.8rem;
           color: var(--accent-lime);
-          background: rgba(19, 115, 51, 0.05);
+          background: var(--accent-purple-glow);
           padding: 8px 10px;
           border-radius: 8px;
           margin-bottom: 16px;
@@ -607,8 +607,8 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .set-row.completed {
-          background: rgba(19, 115, 51, 0.05);
-          border-color: rgba(19, 115, 51, 0.15);
+          background: var(--accent-purple-glow);
+          border-color: var(--accent-lime-glow);
         }
 
         .set-number-label {
@@ -627,9 +627,9 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .btn-spinner {
-          width: 28px;
-          height: 28px;
-          border-radius: 8px;
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
           border: none;
           background: var(--clay-bg-neutral);
           color: var(--color-text-primary);
@@ -707,7 +707,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .set-input:disabled {
-          color: var(--color-text-muted);
+          color: var(--color-text-secondary);
           border-color: transparent;
           background: transparent;
           box-shadow: none;
@@ -766,7 +766,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
 
         .btn-set-action.add {
           color: var(--status-success);
-          border-color: rgba(19, 115, 51, 0.15);
+          border-color: var(--accent-lime-glow);
         }
 
         .btn-set-action.add:hover {

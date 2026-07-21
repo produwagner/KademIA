@@ -249,7 +249,7 @@ export default function LoginScreen({
           align-items: center;
           justify-content: center;
           margin-bottom: 12px;
-          box-shadow: 0 4px 12px rgba(19, 115, 51, 0.2);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .login-logo-icon {

@@ -203,8 +203,8 @@ export default function Dashboard({ workoutData, history, onStartWorkout, onSetA
           font-weight: 600;
           font-size: 0.85rem;
           color: var(--accent-lime);
-          border: 1px solid rgba(19, 115, 51, 0.15);
-          background: rgba(19, 115, 51, 0.05);
+          border: 1px solid var(--accent-lime-glow);
+          background: var(--accent-purple-glow);
         }
 
         .badge-icon {
@@ -292,7 +292,7 @@ export default function Dashboard({ workoutData, history, onStartWorkout, onSetA
 
         .stat-icon.lime {
           color: var(--accent-lime);
-          background: rgba(19, 115, 51, 0.08);
+          background: var(--accent-purple-glow);
         }
 
         .stat-info {

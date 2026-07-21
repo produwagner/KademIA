@@ -837,9 +837,9 @@ export default function Settings({
         }
 
         .badge-status.connected {
-          background-color: rgba(19, 115, 51, 0.08);
+          background-color: var(--accent-purple-glow);
           color: var(--accent-lime);
-          border: 1px solid rgba(19, 115, 51, 0.15);
+          border: 1px solid var(--accent-lime-glow);
         }
 
         .badge-status.disconnected {
@@ -859,22 +859,22 @@ export default function Settings({
         }
 
         .pulsing {
-          box-shadow: 0 0 0 0 rgba(19, 115, 51, 0.4);
+          box-shadow: 0 0 0 0 var(--pulsing-shadow);
           animation: pulse 1.6s infinite;
         }
 
         @keyframes pulse {
           0% {
             transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(19, 115, 51, 0.7);
+            box-shadow: 0 0 0 0 var(--pulsing-shadow-start);
           }
           70% {
             transform: scale(1);
-            box-shadow: 0 0 0 6px rgba(19, 115, 51, 0);
+            box-shadow: 0 0 0 6px var(--pulsing-shadow-end);
           }
           100% {
             transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(19, 115, 51, 0);
+            box-shadow: 0 0 0 0 var(--pulsing-shadow-end);
           }
         }
 
@@ -893,9 +893,9 @@ export default function Settings({
         }
 
         .sync-banner.success {
-          background-color: rgba(19, 115, 51, 0.08);
+          background-color: var(--accent-purple-glow);
           color: var(--status-success);
-          border: 1px solid rgba(19, 115, 51, 0.15);
+          border: 1px solid var(--accent-lime-glow);
         }
 
         .sync-info-text {

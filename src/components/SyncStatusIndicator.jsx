@@ -71,7 +71,7 @@ export default function SyncStatusIndicator({ status, lastSync, isOnline, onSync
           <div className="tooltip-header">
             <h4>Sincronização</h4>
             <span className="network-status-badge" style={{ 
-              backgroundColor: isOnline ? "rgba(19, 115, 51, 0.08)" : "rgba(197, 34, 31, 0.08)",
+              backgroundColor: isOnline ? "var(--accent-purple-glow)" : "rgba(197, 34, 31, 0.08)",
               color: isOnline ? "var(--status-success)" : "var(--status-error)"
             }}>
               {isOnline ? "Online" : "Offline"}

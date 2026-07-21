@@ -59,6 +59,11 @@
   /* Deep Background */
   --bg-radial-1: #e2e8f0;
   --bg-radial-2: #f8fafc;
+
+  /* Pulsing Animation Tokens */
+  --pulsing-shadow: rgba(0, 138, 71, 0.4);
+  --pulsing-shadow-start: rgba(0, 138, 71, 0.7);
+  --pulsing-shadow-end: rgba(0, 138, 71, 0);
 }
 
 body.dark-theme {
@@ -116,6 +121,11 @@ body.dark-theme {
   /* Deep Background */
   --bg-radial-1: #0d0f12;
   --bg-radial-2: #050607;
+
+  /* Pulsing Animation Tokens */
+  --pulsing-shadow: rgba(173, 255, 47, 0.4);
+  --pulsing-shadow-start: rgba(173, 255, 47, 0.7);
+  --pulsing-shadow-end: rgba(173, 255, 47, 0);
 }
 
 * {
