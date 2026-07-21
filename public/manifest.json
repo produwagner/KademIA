@@ -1,0 +1,18 @@
+{
+  "name": "KademIA",
+  "short_name": "KademIA",
+  "description": "Seu acompanhador de treinos de hipertrofia.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#137333",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
