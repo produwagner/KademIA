@@ -887,9 +887,9 @@ export default function Settings({
         }
 
         .sync-banner.error {
-          background-color: rgba(197, 34, 31, 0.08);
+          background-color: var(--status-error-glow);
           color: var(--status-error);
-          border: 1px solid rgba(197, 34, 31, 0.15);
+          border: 1px solid var(--status-error-glow);
         }
 
         .sync-banner.success {
@@ -1077,13 +1077,8 @@ export default function Settings({
         }
 
         .danger-zone-card {
-          border-color: rgba(197, 34, 31, 0.25) !important;
-          background-color: rgba(197, 34, 31, 0.02) !important;
-        }
-
-        body.dark-theme .danger-zone-card {
-          background-color: rgba(242, 139, 130, 0.03) !important;
-          border-color: rgba(242, 139, 130, 0.2) !important;
+          border-color: var(--status-error-glow) !important;
+          background-color: var(--status-error-glow) !important;
         }
 
         .danger-actions-row {

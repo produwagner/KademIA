@@ -649,7 +649,7 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
         .btn-routine-action.delete:hover:not(:disabled) {
           border-color: var(--status-error);
           color: var(--status-error);
-          background: rgba(197, 34, 31, 0.05);
+          background: var(--status-error-glow);
           box-shadow: none;
         }
 

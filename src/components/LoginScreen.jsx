@@ -131,7 +131,7 @@ export default function LoginScreen({
           <div className="login-logo-circle">
             <BarbellIcon size={36} className="login-logo-icon" />
           </div>
-          <h1 className="login-title">Gym<span>Wag</span></h1>
+          <h1 className="login-title">Kadem<span>IA</span></h1>
           <p className="login-subtitle">Treino & Sincronização em Nuvem</p>
         </div>
 
@@ -284,9 +284,9 @@ export default function LoginScreen({
         .login-error-banner {
           width: 100%;
           padding: 10px 12px;
-          background-color: rgba(197, 34, 31, 0.08);
+          background-color: var(--status-error-glow);
           color: var(--status-error);
-          border: 1px solid rgba(197, 34, 31, 0.15);
+          border: 1px solid var(--status-error-glow);
           border-radius: 8px;
           font-size: 0.8rem;
           font-weight: 500;

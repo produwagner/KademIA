@@ -478,8 +478,8 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .btn-cancel {
-          background: rgba(197, 34, 31, 0.05);
-          border: 1px solid rgba(197, 34, 31, 0.2);
+          background: var(--status-error-glow);
+          border: 1px solid var(--status-error-glow);
           color: var(--status-error);
           padding: 6px 12px;
           border-radius: 8px;
@@ -491,7 +491,8 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .btn-cancel:hover {
-          background: rgba(197, 34, 31, 0.1);
+          background: var(--status-error-glow);
+          opacity: 0.85;
         }
 
         .exercises-list-wrapper {
@@ -776,11 +777,11 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
 
         .btn-set-action.remove {
           color: var(--status-error);
-          border-color: rgba(197, 34, 31, 0.15);
+          border-color: var(--status-error-glow);
         }
 
         .btn-set-action.remove:hover {
-          background: rgba(197, 34, 31, 0.04);
+          background: var(--status-error-glow);
           transform: translateY(-1px);
         }
 

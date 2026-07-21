@@ -22,7 +22,8 @@
   
   --status-success: #008a47;
   --status-warning: #e37400;
-  --status-error: #c5221f;
+  --status-error: #e11d48; /* Sports crimson red */
+  --status-error-glow: rgba(225, 29, 72, 0.08);
   
   --nav-bg: rgba(255, 255, 255, 0.85);
   --nav-border: rgba(0, 0, 0, 0.05);
@@ -87,7 +88,8 @@ body.dark-theme {
   
   --status-success: #adff2f;
   --status-warning: #fdd663;
-  --status-error: #f87171;
+  --status-error: #ff4d4d; /* Bright sports neon red */
+  --status-error-glow: rgba(255, 77, 77, 0.15);
   
   --nav-bg: rgba(11, 12, 15, 0.88);
   --nav-border: rgba(255, 255, 255, 0.06);
@@ -326,7 +328,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-danger:hover {
-  background-color: rgba(197, 34, 31, 0.05);
+  background-color: var(--status-error-glow);
   border-color: var(--status-error);
 }
 
