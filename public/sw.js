@@ -65,3 +65,47 @@ self.addEventListener('fetch', (e) => {
     })
   );
 });
+
+let activeTimeout = null;
+
+self.addEventListener('message', (event) => {
+  const data = event.data;
+  if (!data) return;
+
+  if (data.type === 'SCHEDULE_NOTIFICATION') {
+    if (activeTimeout) {
+      clearTimeout(activeTimeout);
+    }
+    activeTimeout = setTimeout(() => {
+      self.registration.showNotification(data.title, {
+        body: data.body,
+        icon: './favicon.svg',
+        vibrate: [200, 100, 200],
+        tag: 'rest-timer-notification',
+        renotify: true
+      });
+      activeTimeout = null;
+    }, data.delay);
+  } else if (data.type === 'CANCEL_NOTIFICATION') {
+    if (activeTimeout) {
+      clearTimeout(activeTimeout);
+      activeTimeout = null;
+    }
+  }
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      if (self.clients.openWindow) {
+        return self.clients.openWindow('./');
+      }
+    })
+  );
+});

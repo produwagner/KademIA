@@ -24,7 +24,22 @@ export default function Timer({ duration, onFinish, onCancel }) {
   const [timeLeft, setTimeLeft] = useState(duration);
   const [isActive, setIsActive] = useState(true);
   const [isMinimized, setIsMinimized] = useState(true);
+  const [endTime, setEndTime] = useState(null);
   const timerRef = useRef(null);
+
+  // Request notifications and setup clean SW schedule on unmount
+  useEffect(() => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+
+    return () => {
+      // Unmounting: clean up service worker schedule
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: "CANCEL_NOTIFICATION" });
+      }
+    };
+  }, []);
 
   // Play a soft beep sound using Web Audio API (no external file needed!)
   const playBeep = () => {
@@ -67,32 +82,87 @@ export default function Timer({ duration, onFinish, onCancel }) {
   useEffect(() => {
     setTimeLeft(duration);
     setIsActive(true);
+    const target = Date.now() + duration * 1000;
+    setEndTime(target);
+
+    // Schedule notification in Service Worker (with 500ms safety buffer)
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({
+        type: "SCHEDULE_NOTIFICATION",
+        title: "Fim do Descanso!",
+        body: "Hora de começar a próxima série!",
+        delay: (duration * 1000) + 500
+      });
+    }
   }, [duration]);
 
   useEffect(() => {
-    if (isActive && timeLeft > 0) {
+    if (isActive && timeLeft > 0 && endTime) {
       timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
-      }, 1000);
+        const remaining = Math.max(0, Math.round((endTime - Date.now()) / 1000));
+        setTimeLeft(remaining);
+        if (remaining === 0) {
+          clearInterval(timerRef.current);
+          playBeep();
+          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.controller.postMessage({ type: "CANCEL_NOTIFICATION" });
+          }
+          onFinish();
+        }
+      }, 500);
     } else if (timeLeft === 0) {
       clearInterval(timerRef.current);
-      playBeep();
-      onFinish();
     }
 
     return () => clearInterval(timerRef.current);
-  }, [isActive, timeLeft, onFinish]);
+  }, [isActive, timeLeft, endTime, onFinish]);
 
   const toggleTimer = () => {
-    setIsActive(!isActive);
+    if (isActive) {
+      setIsActive(false);
+      setEndTime(null);
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: "CANCEL_NOTIFICATION" });
+      }
+    } else {
+      setIsActive(true);
+      const target = Date.now() + timeLeft * 1000;
+      setEndTime(target);
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: "SCHEDULE_NOTIFICATION",
+          title: "Fim do Descanso!",
+          body: "Hora de começar a próxima série!",
+          delay: (timeLeft * 1000) + 500
+        });
+      }
+    }
   };
 
   const add30Seconds = () => {
-    setTimeLeft((prev) => prev + 30);
+    setTimeLeft((prev) => {
+      const nextVal = prev + 30;
+      if (isActive) {
+        const target = Date.now() + nextVal * 1000;
+        setEndTime(target);
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller.postMessage({
+            type: "SCHEDULE_NOTIFICATION",
+            title: "Fim do Descanso!",
+            body: "Hora de começar a próxima série!",
+            delay: (nextVal * 1000) + 500
+          });
+        }
+      }
+      return nextVal;
+    });
   };
 
   const skipTimer = () => {
     clearInterval(timerRef.current);
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "CANCEL_NOTIFICATION" });
+    }
     onFinish();
   };
 
