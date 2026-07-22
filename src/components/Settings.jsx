@@ -427,7 +427,7 @@ export default function Settings({
                   <span className="color-preview-dot" style={{ backgroundColor: secondaryColor }} />
                   {secondaryColor.toUpperCase()}
                 </span>
-                {secondaryColor.toLowerCase() !== defaultColor.toLowerCase() && (
+                {(secondaryColor || defaultGreen).toLowerCase() !== defaultGreen.toLowerCase() && (
                   <button 
                     type="button" 
                     className="btn-reset-color"
@@ -445,75 +445,78 @@ export default function Settings({
             </p>
 
             <div className="color-swatches-grid">
-              {/* 1ª Bolinha: Verde Luminoso (Padrão) */}
-              <button
-                type="button"
-                className={`color-swatch-btn ${secondaryColor.toLowerCase() === defaultGreen.toLowerCase() ? "active" : ""}`}
-                style={{ 
-                  backgroundColor: defaultGreen,
-                  "--swatch-glow": `${defaultGreen}66`
-                }}
-                onClick={() => handleSelectColor(defaultGreen)}
-                title="Verde Luminoso (Padrão)"
-              >
-                {secondaryColor.toLowerCase() === defaultGreen.toLowerCase() && (
-                  <CheckIcon size={16} className="color-swatch-check" />
-                )}
-              </button>
+              {(() => {
+                const currentColor = (secondaryColor || defaultGreen).toLowerCase();
+                const defaultHex = defaultGreen.toLowerCase();
+                const isDefaultActive = currentColor === defaultHex;
+                const isPresetActive = PRESET_COLORS.some(p => p.hex.toLowerCase() === currentColor);
+                const isCustomActive = !isDefaultActive && !isPresetActive;
 
-              {/* 2ª Bolinha: Cor Personalizada (Com anel degradê arco-íris) */}
-              <div 
-                className={`custom-color-wrapper ${
-                  secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
-                  !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase())
-                    ? "active"
-                    : ""
-                }`}
-                title="Escolher cor personalizada..."
-              >
-                <div 
-                  className="custom-color-inner" 
-                  style={{ 
-                    backgroundColor: secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
-                    !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase())
-                      ? secondaryColor
-                      : "transparent" 
-                  }}
-                >
-                  {secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
-                   !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) && (
-                    <CheckIcon size={16} className="color-swatch-check" />
-                  )}
-                </div>
-                <input 
-                  type="color" 
-                  value={secondaryColor || defaultGreen} 
-                  onChange={(e) => handleSelectColor(e.target.value)}
-                  className="custom-color-input"
-                />
-              </div>
-
-              {/* Demais Bolinhas: Cores Predefinidas */}
-              {PRESET_COLORS.map((preset) => {
-                const isActive = secondaryColor.toLowerCase() === preset.hex.toLowerCase() && secondaryColor.toLowerCase() !== defaultGreen.toLowerCase();
                 return (
-                  <button
-                    key={preset.hex}
-                    type="button"
-                    className={`color-swatch-btn ${isActive ? "active" : ""}`}
-                    style={{ 
-                      backgroundColor: preset.hex,
-                      "--swatch-glow": `${preset.hex}66`
-                    }}
-                    onClick={() => handleSelectColor(preset.hex)}
-                    title={preset.name}
-                  >
-                    {isActive && (
-                      <CheckIcon size={16} className="color-swatch-check" />
-                    )}
-                  </button>
+                  <>
+                    {/* 1ª Bolinha: Verde Luminoso (Padrão) */}
+                    <button
+                      type="button"
+                      className={`color-swatch-btn ${isDefaultActive ? "active" : ""}`}
+                      style={{ 
+                        backgroundColor: defaultGreen,
+                        "--swatch-glow": `${defaultGreen}66`
+                      }}
+                      onClick={() => handleSelectColor(defaultGreen)}
+                      title="Verde Luminoso (Padrão)"
+                    >
+                      {isDefaultActive && (
+                        <CheckIcon size={16} className="color-swatch-check" />
+                      )}
+                    </button>
+
+                    {/* 2ª Bolinha: Cor Personalizada (Com anel degradê arco-íris) */}
+                    <div 
+                      className={`custom-color-wrapper ${isCustomActive ? "active" : ""}`}
+                      title="Escolher cor personalizada..."
+                    >
+                      <div 
+                        className="custom-color-inner" 
+                        style={{ 
+                          backgroundColor: isCustomActive ? secondaryColor : "transparent" 
+                        }}
+                      >
+                        {isCustomActive && (
+                          <CheckIcon size={16} className="color-swatch-check" />
+                        )}
+                      </div>
+                      <input 
+                        type="color" 
+                        value={secondaryColor || defaultGreen} 
+                        onChange={(e) => handleSelectColor(e.target.value)}
+                        className="custom-color-input"
+                      />
+                    </div>
+
+                    {/* Demais Bolinhas: Cores Predefinidas */}
+                    {PRESET_COLORS.map((preset) => {
+                      const isActive = currentColor === preset.hex.toLowerCase() && !isDefaultActive;
+                      return (
+                        <button
+                          key={preset.hex}
+                          type="button"
+                          className={`color-swatch-btn ${isActive ? "active" : ""}`}
+                          style={{ 
+                            backgroundColor: preset.hex,
+                            "--swatch-glow": `${preset.hex}66`
+                          }}
+                          onClick={() => handleSelectColor(preset.hex)}
+                          title={preset.name}
+                        >
+                          {isActive && (
+                            <CheckIcon size={16} className="color-swatch-check" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </>
                 );
-              })}
+              })()}
             </div>
 
             {/* Live Interactive Preview Box */}
