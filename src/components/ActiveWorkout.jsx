@@ -631,8 +631,8 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           width: 36px;
           height: 36px;
           border-radius: 10px;
-          border: none;
-          background: var(--clay-bg-neutral);
+          border: 1px solid var(--border-color);
+          background: rgba(255, 255, 255, 0.05);
           color: var(--color-text-primary);
           font-size: 0.95rem;
           font-weight: 700;
@@ -644,23 +644,18 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           transition: all 0.15s ease;
           padding: 0;
           flex-shrink: 0;
-          box-shadow: 
-            0 2px 4px var(--clay-neutral-shadow),
-            inset 0 1px 2px var(--clay-neutral-inner-light),
-            inset 0 -1px 2px var(--clay-neutral-inner-dark);
+          box-shadow: none;
         }
 
         .btn-spinner:hover:not(:disabled) {
-          background: var(--bg-card-hover);
+          background: var(--accent-active);
+          border-color: var(--border-hover);
           transform: translateY(-1px);
         }
 
         .btn-spinner:active:not(:disabled) {
-          transform: translateY(1px);
-          box-shadow: 
-            0 1px 2px var(--clay-neutral-shadow),
-            inset 0 0.5px 1px var(--clay-neutral-inner-light),
-            inset 0 -0.5px 1px var(--clay-neutral-inner-dark);
+          transform: translateY(0);
+          box-shadow: none;
         }
 
         .btn-spinner:disabled {
@@ -750,7 +745,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .btn-set-action {
-          background: var(--clay-bg-neutral);
+          background: rgba(255, 255, 255, 0.04);
           border: 1px solid var(--border-color);
           font-family: var(--font-body);
           font-size: 0.8rem;
@@ -759,10 +754,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           padding: 6px 12px;
           border-radius: 8px;
           transition: all 0.2s;
-          box-shadow: 
-            0 2px 4px var(--clay-neutral-shadow),
-            inset 0 1px 2px var(--clay-neutral-inner-light),
-            inset 0 -1px 2px var(--clay-neutral-inner-dark);
+          box-shadow: none;
         }
 
         .btn-set-action.add {
@@ -797,7 +789,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           width: 36px;
           height: 36px;
           border-radius: 10px;
-          background: var(--clay-bg-neutral);
+          background: rgba(255, 255, 255, 0.04);
           border: 1px solid var(--border-color);
           color: var(--color-text-secondary);
           cursor: pointer;
@@ -807,10 +799,7 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
           transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
           justify-self: center;
           flex-shrink: 0;
-          box-shadow: 
-            0 2px 4px var(--clay-neutral-shadow),
-            inset 0 1px 2px var(--clay-neutral-inner-light),
-            inset 0 -1px 2px var(--clay-neutral-inner-dark);
+          box-shadow: none;
         }
 
         .btn-check-set:hover {
@@ -820,17 +809,14 @@ export default function ActiveWorkout({ routine, history, onSaveWorkout, onCance
         }
 
         .btn-check-set:active {
-          transform: translateY(1px);
+          transform: translateY(0);
         }
 
         .btn-check-set.checked {
-          background: var(--clay-bg-primary);
-          border-color: var(--clay-bg-primary);
+          background: var(--accent-lime);
+          border-color: var(--accent-lime);
           color: var(--color-on-accent);
-          box-shadow: 
-            0 3px 8px var(--clay-shadow-outer),
-            inset 0 1.5px 3px var(--clay-inner-light),
-            inset 0 -1.5px 3px var(--clay-inner-dark);
+          box-shadow: 0 4px 12px var(--accent-lime-glow);
         }
 
         .finish-workout-btn {

@@ -595,12 +595,9 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
         }
 
         .routine-tab-btn.active {
-          background: var(--clay-bg-primary);
+          background: var(--accent-purple);
           color: var(--color-on-accent);
-          box-shadow: 
-            0 4px 10px var(--clay-shadow-outer),
-            inset 0 1.5px 3px var(--clay-inner-light),
-            inset 0 -1.5px 3px var(--clay-inner-dark);
+          box-shadow: 0 4px 12px var(--accent-purple-glow);
         }
 
         .routine-action-buttons {
@@ -616,28 +613,23 @@ export default function RoutineManager({ workoutData, onUpdateWorkoutData, syncP
           font-weight: 600;
           border-radius: 10px;
           border: 1px solid var(--border-color);
-          background: var(--clay-bg-neutral);
+          background: rgba(255, 255, 255, 0.04);
           color: var(--color-text-secondary);
           cursor: pointer;
           transition: all 0.2s;
-          box-shadow: 
-            0 2px 4px var(--clay-neutral-shadow),
-            inset 0 1px 2px var(--clay-neutral-inner-light),
-            inset 0 -1px 2px var(--clay-neutral-inner-dark);
+          box-shadow: none;
         }
 
         .btn-routine-action:hover:not(:disabled) {
           border-color: var(--border-hover);
-          background: var(--bg-card-hover);
+          background: var(--accent-active);
+          color: var(--color-text-primary);
           transform: translateY(-1px);
         }
 
         .btn-routine-action:active:not(:disabled) {
-          transform: translateY(1px);
-          box-shadow: 
-            0 1px 2px var(--clay-neutral-shadow),
-            inset 0 0.5px 1px var(--clay-neutral-inner-light),
-            inset 0 -0.5px 1px var(--clay-neutral-inner-dark);
+          transform: translateY(0);
+          box-shadow: none;
         }
 
         .btn-routine-action:disabled {

@@ -227,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
 }
 
-/* Accessible & Tactile Buttons (Claymorphism Style) */
+/* Modern High-Performance Buttons (Solid Flat & Outlined Glass) */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -237,99 +237,88 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 0.95rem;
   border-radius: 16px;
-  border: none;
+  border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 8px;
   user-select: none;
 }
 
-/* Primary Button (Claymorphism Green) */
+/* Primary Button (Solid Flat with Soft Neon Glow) */
 .btn-primary {
-  background: var(--clay-bg-primary);
+  background: var(--accent-purple);
   color: var(--color-on-accent);
-  box-shadow: 
-    0 6px 16px var(--clay-shadow-outer),
-    inset 0 2px 4px var(--clay-inner-light),
-    inset 0 -2px 4px var(--clay-inner-dark);
+  border-color: var(--accent-purple);
+  box-shadow: 0 4px 14px var(--accent-purple-glow);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 8px 20px var(--clay-shadow-outer),
-    inset 0 3px 6px var(--clay-inner-light),
-    inset 0 -3px 6px var(--clay-inner-dark);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 6px 20px var(--accent-lime-glow);
 }
 
 .btn-primary:active {
-  transform: translateY(1px);
-  box-shadow: 
-    0 2px 6px var(--clay-shadow-outer),
-    inset 0 1px 2px var(--clay-inner-light),
-    inset 0 -1px 2px var(--clay-inner-dark);
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--accent-purple-glow);
 }
 
-/* Lime Button (Claymorphism Lime) */
+/* Lime Button */
 .btn-lime {
-  background: var(--clay-bg-primary);
+  background: var(--accent-lime);
   color: var(--color-on-accent);
-  box-shadow: 
-    0 6px 16px var(--clay-shadow-outer),
-    inset 0 2px 4px var(--clay-inner-light),
-    inset 0 -2px 4px var(--clay-inner-dark);
+  border-color: var(--accent-lime);
+  box-shadow: 0 4px 14px var(--accent-lime-glow);
 }
 
 .btn-lime:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 8px 20px var(--clay-shadow-outer),
-    inset 0 3px 6px var(--clay-inner-light),
-    inset 0 -3px 6px var(--clay-inner-dark);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 6px 20px var(--accent-lime-glow);
 }
 
 .btn-lime:active {
-  transform: translateY(1px);
-  box-shadow: 
-    0 2px 6px var(--clay-shadow-outer),
-    inset 0 1px 2px var(--clay-inner-light),
-    inset 0 -1px 2px var(--clay-inner-dark);
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--accent-lime-glow);
 }
 
-/* Secondary Button (Claymorphism Soft Neutral) */
+/* Secondary Button (Outlined Glass style, similar to Danger Zone) */
 .btn-secondary {
-  background: var(--clay-bg-neutral);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--color-text-primary);
   border: 1px solid var(--border-color);
-  box-shadow: 
-    0 4px 10px var(--clay-neutral-shadow),
-    inset 0 2px 3px var(--clay-neutral-inner-light),
-    inset 0 -2px 3px var(--clay-neutral-inner-dark);
+  box-shadow: none;
 }
 
 .btn-secondary:hover {
   border-color: var(--border-hover);
-  background: var(--bg-card-hover);
+  background: var(--accent-active);
+  color: var(--color-text-primary);
   transform: translateY(-1px);
 }
 
 .btn-secondary:active {
-  transform: translateY(1px);
-  box-shadow: 
-    0 2px 4px var(--clay-neutral-shadow),
-    inset 0 1px 2px var(--clay-neutral-inner-light),
-    inset 0 -1px 2px var(--clay-neutral-inner-dark);
+  transform: translateY(0);
+  background: var(--bg-card-hover);
 }
 
 .btn-danger {
   background: transparent;
   color: var(--status-error);
   border: 1px solid var(--border-color);
+  box-shadow: none;
 }
 
 .btn-danger:hover {
   background-color: var(--status-error-glow);
   border-color: var(--status-error);
+  transform: translateY(-1px);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
 }
 
 /* Clean Google-like Animations */
