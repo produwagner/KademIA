@@ -21,16 +21,7 @@ import {
 } from "../services/googleDriveService";
 import { GOOGLE_CLIENT_ID } from "../config";
 
-const PRESET_COLORS = [
-  { hex: "#00F0FF", name: "Ciano Neon" },
-  { hex: "#A855F7", name: "Roxo Elétrico" },
-  { hex: "#10B981", name: "Verde Esmeralda" },
-  { hex: "#FF6B00", name: "Laranja Vibrante" },
-  { hex: "#FF2E93", name: "Rosa Neon" },
-  { hex: "#3B82F6", name: "Azul Cobalto" },
-  { hex: "#F59E0B", name: "Âmbar Dourado" },
-  { hex: "#EF4444", name: "Vermelho Carmim" }
-];
+
 
 export default function Settings({
   profile,
@@ -449,8 +440,7 @@ export default function Settings({
                 const currentColor = (secondaryColor || defaultGreen).toLowerCase();
                 const defaultHex = defaultGreen.toLowerCase();
                 const isDefaultActive = currentColor === defaultHex;
-                const isPresetActive = PRESET_COLORS.some(p => p.hex.toLowerCase() === currentColor);
-                const isCustomActive = !isDefaultActive && !isPresetActive;
+                const isCustomActive = !isDefaultActive;
 
                 return (
                   <>
@@ -470,7 +460,7 @@ export default function Settings({
                       )}
                     </button>
 
-                    {/* 2ª Bolinha: Cor Personalizada (Com anel degradê arco-íris) */}
+                    {/* 2ª Bolinha (por último): Cor Personalizada (Com anel degradê arco-íris) */}
                     <div 
                       className={`custom-color-wrapper ${isCustomActive ? "active" : ""}`}
                       title="Escolher cor personalizada..."
@@ -492,51 +482,9 @@ export default function Settings({
                         className="custom-color-input"
                       />
                     </div>
-
-                    {/* Demais Bolinhas: Cores Predefinidas */}
-                    {PRESET_COLORS.map((preset) => {
-                      const isActive = currentColor === preset.hex.toLowerCase() && !isDefaultActive;
-                      return (
-                        <button
-                          key={preset.hex}
-                          type="button"
-                          className={`color-swatch-btn ${isActive ? "active" : ""}`}
-                          style={{ 
-                            backgroundColor: preset.hex,
-                            "--swatch-glow": `${preset.hex}66`
-                          }}
-                          onClick={() => handleSelectColor(preset.hex)}
-                          title={preset.name}
-                        >
-                          {isActive && (
-                            <CheckIcon size={16} className="color-swatch-check" />
-                          )}
-                        </button>
-                      );
-                    })}
                   </>
                 );
               })()}
-            </div>
-
-            {/* Live Interactive Preview Box */}
-            <div className="color-preview-demo-box">
-              <span className="preview-label" style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)" }}>
-                Pré-visualização do destaque:
-              </span>
-              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                <span className="preview-badge-secondary">
-                  <PaletteIcon size={14} /> Tag Secundária
-                </span>
-                <button 
-                  type="button" 
-                  className="btn btn-secondary" 
-                  style={{ padding: "6px 14px", fontSize: "0.82rem" }}
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Botão Secundário
-                </button>
-              </div>
             </div>
           </div>
 
