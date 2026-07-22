@@ -342,12 +342,12 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
         }
 
         .landing-actions .btn-primary {
-          box-shadow: 0 4px 16px rgba(163, 230, 53, 0.25);
+          box-shadow: none !important;
           transition: all 0.2s ease;
         }
 
         .landing-actions .btn-primary:hover {
-          box-shadow: 0 6px 22px rgba(163, 230, 53, 0.4);
+          box-shadow: none !important;
           transform: translateY(-1px);
         }
 
@@ -357,6 +357,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           border: 1px solid rgba(255, 255, 255, 0.2) !important;
           color: #f8fafc !important;
           font-weight: 600;
+          box-shadow: none !important;
           transition: all 0.2s ease;
         }
 
@@ -365,7 +366,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           border-color: rgba(255, 255, 255, 0.4) !important;
           color: #ffffff !important;
           transform: translateY(-1px);
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+          box-shadow: none !important;
         }
 
         .landing-footer {

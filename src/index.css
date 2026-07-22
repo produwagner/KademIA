@@ -227,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-primary);
 }
 
-/* Modern High-Performance Buttons (Solid Flat & Outlined Glass) */
+/* Modern High-Performance Flat Buttons (Flat & Outlined Glass) */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -242,49 +242,50 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 8px;
   user-select: none;
+  box-shadow: none;
 }
 
-/* Primary Button (Solid Flat with Soft Neon Glow) */
+/* Primary Button (Totally Flat) */
 .btn-primary {
   background: var(--accent-purple);
   color: var(--color-on-accent);
   border-color: var(--accent-purple);
-  box-shadow: 0 4px 14px var(--accent-purple-glow);
+  box-shadow: none;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  box-shadow: 0 6px 20px var(--accent-lime-glow);
+  box-shadow: none;
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px var(--accent-purple-glow);
+  box-shadow: none;
 }
 
-/* Lime Button */
+/* Lime Button (Totally Flat) */
 .btn-lime {
   background: var(--accent-lime);
   color: var(--color-on-accent);
   border-color: var(--accent-lime);
-  box-shadow: 0 4px 14px var(--accent-lime-glow);
+  box-shadow: none;
 }
 
 .btn-lime:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  box-shadow: 0 6px 20px var(--accent-lime-glow);
+  box-shadow: none;
 }
 
 .btn-lime:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px var(--accent-lime-glow);
+  box-shadow: none;
 }
 
-/* Secondary Button (Outlined Glass style, similar to Danger Zone) */
+/* Secondary Button (Outlined Glass Flat) */
 .btn-secondary {
   background: rgba(255, 255, 255, 0.05);
   color: var(--color-text-primary);
@@ -297,11 +298,13 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--accent-active);
   color: var(--color-text-primary);
   transform: translateY(-1px);
+  box-shadow: none;
 }
 
 .btn-secondary:active {
   transform: translateY(0);
   background: var(--bg-card-hover);
+  box-shadow: none;
 }
 
 .btn-danger {
@@ -315,10 +318,12 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--status-error-glow);
   border-color: var(--status-error);
   transform: translateY(-1px);
+  box-shadow: none;
 }
 
 .btn-danger:active {
   transform: translateY(0);
+  box-shadow: none;
 }
 
 /* Clean Google-like Animations */
