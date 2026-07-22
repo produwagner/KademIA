@@ -20,6 +20,7 @@ import {
   performFullSync
 } from "../services/googleDriveService";
 import { GOOGLE_CLIENT_ID } from "../config";
+import { applyAccentColorToDOM } from "../utils/theme";
 
 
 
@@ -71,34 +72,8 @@ export default function Settings({
 
   const handleSelectColor = (hex) => {
     setSecondaryColor(hex);
-    // Apply live feedback immediately
-    document.documentElement.style.setProperty("--accent-purple", hex);
-    document.documentElement.style.setProperty("--accent-lime", hex);
-    document.documentElement.style.setProperty("--border-focus", hex);
-    document.documentElement.style.setProperty("--status-success", hex);
-    document.documentElement.style.setProperty("--clay-bg-primary", hex);
-    document.documentElement.style.setProperty("--accent-secondary", hex);
-
-    const cleanHex = hex.replace("#", "");
-    if (cleanHex.length === 6) {
-      const r = parseInt(cleanHex.substring(0, 2), 16);
-      const g = parseInt(cleanHex.substring(2, 4), 16);
-      const b = parseInt(cleanHex.substring(4, 6), 16);
-
-      document.documentElement.style.setProperty("--accent-purple-glow", `rgba(${r}, ${g}, ${b}, 0.12)`);
-      document.documentElement.style.setProperty("--accent-lime-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
-      document.documentElement.style.setProperty("--accent-secondary-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
-      document.documentElement.style.setProperty("--border-hover", `rgba(${r}, ${g}, ${b}, 0.25)`);
-      document.documentElement.style.setProperty("--accent-active", `rgba(${r}, ${g}, ${b}, 0.2)`);
-      document.documentElement.style.setProperty("--glass-border-hover", `rgba(${r}, ${g}, ${b}, 0.35)`);
-      document.documentElement.style.setProperty("--pulsing-shadow", `rgba(${r}, ${g}, ${b}, 0.4)`);
-
-      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-      document.documentElement.style.setProperty(
-        "--color-on-accent",
-        luminance > 0.55 ? "#071200" : "#ffffff"
-      );
-    }
+    // Apply live feedback immediately across body and html elements
+    applyAccentColorToDOM(hex);
   };
 
   const handleResetColor = () => {
@@ -478,6 +453,7 @@ export default function Settings({
                       <input 
                         type="color" 
                         value={secondaryColor || defaultGreen} 
+                        onInput={(e) => handleSelectColor(e.target.value)}
                         onChange={(e) => handleSelectColor(e.target.value)}
                         className="custom-color-input"
                       />

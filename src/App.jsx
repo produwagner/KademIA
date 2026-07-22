@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { applyAccentColorToDOM } from "./utils/theme";
 import { defaultWorkout } from "./data/defaultWorkout";
 import LandingPage from "./components/LandingPage";
 import Dashboard from "./components/Dashboard";
@@ -222,37 +223,9 @@ export default function App() {
   const defaultGreen = theme === "dark" ? "#ADFF2F" : "#008A47";
   const activeUserColor = profile?.secondaryColor || defaultGreen;
 
-  // Apply custom accent color to all luminous green CSS variables
+  // Apply custom accent color to all luminous green CSS variables on body & html
   useEffect(() => {
-    const color = activeUserColor;
-    document.documentElement.style.setProperty("--accent-purple", color);
-    document.documentElement.style.setProperty("--accent-lime", color);
-    document.documentElement.style.setProperty("--border-focus", color);
-    document.documentElement.style.setProperty("--status-success", color);
-    document.documentElement.style.setProperty("--clay-bg-primary", color);
-    document.documentElement.style.setProperty("--accent-secondary", color);
-
-    const cleanHex = color.replace("#", "");
-    if (cleanHex.length === 6) {
-      const r = parseInt(cleanHex.substring(0, 2), 16);
-      const g = parseInt(cleanHex.substring(2, 4), 16);
-      const b = parseInt(cleanHex.substring(4, 6), 16);
-
-      document.documentElement.style.setProperty("--accent-purple-glow", `rgba(${r}, ${g}, ${b}, 0.12)`);
-      document.documentElement.style.setProperty("--accent-lime-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
-      document.documentElement.style.setProperty("--accent-secondary-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
-      document.documentElement.style.setProperty("--border-hover", `rgba(${r}, ${g}, ${b}, 0.25)`);
-      document.documentElement.style.setProperty("--accent-active", `rgba(${r}, ${g}, ${b}, 0.2)`);
-      document.documentElement.style.setProperty("--glass-border-hover", `rgba(${r}, ${g}, ${b}, 0.35)`);
-      document.documentElement.style.setProperty("--pulsing-shadow", `rgba(${r}, ${g}, ${b}, 0.4)`);
-      document.documentElement.style.setProperty("--pulsing-shadow-start", `rgba(${r}, ${g}, ${b}, 0.7)`);
-
-      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-      document.documentElement.style.setProperty(
-        "--color-on-accent",
-        luminance > 0.55 ? "#071200" : "#ffffff"
-      );
-    }
+    applyAccentColorToDOM(activeUserColor);
   }, [activeUserColor, theme]);
 
   // Google Sync Settings State
