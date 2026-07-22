@@ -2,7 +2,11 @@ import React from "react";
 
 export const BarbellIcon = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M2 9.5C2 8.67 2.67 8 3.5 8H4c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1h-.5C2.67 16 2 15.33 2 14.5v-5zM5.5 7C5.5 6.17 6.17 5.5 7 5.5h1c.55 0 1 .45 1 1v11c0 .55-.45 1-1 1H7c-.83 0-1.5-.67-1.5-1.5V7zM9.5 11h5v2h-5v-2zm6-4c0-.83.67-1.5 1.5-1.5h1c.55 0 1 .45 1 1v11c0 .55-.45 1-1 1h-1c-.83 0-1.5-.67-1.5-1.5V7zm3.5 2.5c0-.55.45-1 1-1h.5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5h-.5c-.55 0-1-.45-1-1v-5z" />
+    <rect x="2" y="9" width="2" height="6" rx="1" />
+    <rect x="5" y="6" width="3" height="12" rx="1.5" />
+    <rect x="8" y="10.5" width="8" height="3" rx="1" />
+    <rect x="16" y="6" width="3" height="12" rx="1.5" />
+    <rect x="20" y="9" width="2" height="6" rx="1" />
   </svg>
 );
 

@@ -96,7 +96,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           <>
             <div className="landing-logo-wrapper">
               <div className="landing-logo-circle">
-                <BarbellIcon size={36} className="landing-logo-icon" />
+                <BarbellIcon size={42} className="landing-logo-icon" />
               </div>
               <h1 className="landing-title">Instalando...</h1>
               <p className="landing-subtitle">O KademIA está chegando!</p>
@@ -118,7 +118,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           <>
             <div className="landing-logo-wrapper">
               <div className="landing-logo-circle">
-                <BarbellIcon size={36} className="landing-logo-icon" />
+                <BarbellIcon size={42} className="landing-logo-icon" />
               </div>
               <h1 className="landing-title">Kadem<span>IA</span></h1>
               <p className="landing-subtitle">Seu treino, no seu ritmo.</p>
