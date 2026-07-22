@@ -16,6 +16,57 @@
         window.deferredPrompt = e;
         window.dispatchEvent(new CustomEvent('pwa-prompt-available', { detail: e }));
       });
+      (function() {
+        try {
+          var savedColor = localStorage.getItem('kademia_secondary_color');
+          if (!savedColor) {
+            var prof = localStorage.getItem('kademia_profile');
+            if (prof) savedColor = JSON.parse(prof).secondaryColor;
+          }
+          if (savedColor) {
+            var clean = savedColor.replace('#', '').trim();
+            if (clean.length === 6) {
+              var r = parseInt(clean.substring(0, 2), 16);
+              var g = parseInt(clean.substring(2, 4), 16);
+              var b = parseInt(clean.substring(4, 6), 16);
+              var hoverR = Math.max(0, Math.floor(r * 0.85));
+              var hoverG = Math.max(0, Math.floor(g * 0.85));
+              var hoverB = Math.max(0, Math.floor(b * 0.85));
+              var hoverHex = '#' + hoverR.toString(16).padStart(2, '0') + hoverG.toString(16).padStart(2, '0') + hoverB.toString(16).padStart(2, '0');
+              var activeR = Math.max(0, Math.floor(r * 0.75));
+              var activeG = Math.max(0, Math.floor(g * 0.75));
+              var activeB = Math.max(0, Math.floor(b * 0.75));
+              var activeHex = '#' + activeR.toString(16).padStart(2, '0') + activeG.toString(16).padStart(2, '0') + activeB.toString(16).padStart(2, '0');
+              var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+              var onAccent = lum > 0.55 ? '#071200' : '#ffffff';
+
+              var css = ':root, body, body.dark-theme { ' +
+                '--accent-purple: ' + savedColor + ' !important; ' +
+                '--accent-lime: ' + savedColor + ' !important; ' +
+                '--accent-secondary: ' + savedColor + ' !important; ' +
+                '--border-focus: ' + savedColor + ' !important; ' +
+                '--status-success: ' + savedColor + ' !important; ' +
+                '--clay-bg-primary: ' + savedColor + ' !important; ' +
+                '--accent-hover: ' + hoverHex + ' !important; ' +
+                '--accent-active-color: ' + activeHex + ' !important; ' +
+                '--accent-purple-glow: rgba(' + r + ',' + g + ',' + b + ',0.15) !important; ' +
+                '--accent-lime-glow: rgba(' + r + ',' + g + ',' + b + ',0.2) !important; ' +
+                '--accent-secondary-glow: rgba(' + r + ',' + g + ',' + b + ',0.2) !important; ' +
+                '--border-hover: rgba(' + r + ',' + g + ',' + b + ',0.3) !important; ' +
+                '--accent-active: rgba(' + r + ',' + g + ',' + b + ',0.25) !important; ' +
+                '--glass-border-hover: rgba(' + r + ',' + g + ',' + b + ',0.4) !important; ' +
+                '--pulsing-shadow: rgba(' + r + ',' + g + ',' + b + ',0.4) !important; ' +
+                '--pulsing-shadow-start: rgba(' + r + ',' + g + ',' + b + ',0.7) !important; ' +
+                '--color-on-accent: ' + onAccent + ' !important; }';
+
+              var style = document.createElement('style');
+              style.id = 'theme-accent-override';
+              style.innerHTML = css;
+              document.head.appendChild(style);
+            }
+          }
+        } catch(e) {}
+      })();
     </script>
   </head>
   <body>

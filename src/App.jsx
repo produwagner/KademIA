@@ -201,10 +201,20 @@ export default function App() {
   const [profile, setProfile] = useState(() => {
     try {
       const saved = localStorage.getItem("kademia_profile");
-      return saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "", secondaryColor: "" };
+      const parsed = saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "", secondaryColor: "" };
+      const savedSecondary = localStorage.getItem("kademia_secondary_color");
+      if (savedSecondary && !parsed.secondaryColor) {
+        parsed.secondaryColor = savedSecondary;
+      }
+      return parsed;
     } catch (e) {
       console.error("Erro ao carregar profile:", e);
-      return { name: "Wagner", weight: "", height: "", secondaryColor: "" };
+      return { 
+        name: "Wagner", 
+        weight: "", 
+        height: "", 
+        secondaryColor: localStorage.getItem("kademia_secondary_color") || "" 
+      };
     }
   });
 
@@ -221,7 +231,7 @@ export default function App() {
 
   // Default luminous green color based on active theme
   const defaultGreen = theme === "dark" ? "#ADFF2F" : "#008A47";
-  const activeUserColor = profile?.secondaryColor || defaultGreen;
+  const activeUserColor = profile?.secondaryColor || localStorage.getItem("kademia_secondary_color") || defaultGreen;
 
   // Apply custom accent color to all luminous green CSS variables on body & html
   useEffect(() => {
@@ -757,13 +767,20 @@ export default function App() {
       if (result) {
         setHistory(result.history);
         setProfileHistory(result.profileHistory);
-        setProfile(result.profile);
+        
+        const currentSecondaryColor = profile?.secondaryColor || localStorage.getItem("kademia_secondary_color");
+        const mergedProfile = {
+          ...result.profile,
+          secondaryColor: currentSecondaryColor || result.profile?.secondaryColor || ""
+        };
+        setProfile(mergedProfile);
+
         const cleanWorkoutData = sanitizeWorkoutData(result.workoutData);
         setWorkoutData(cleanWorkoutData);
 
         localStorage.setItem("kademia_history", JSON.stringify(result.history));
         localStorage.setItem("kademia_profile_history", JSON.stringify(result.profileHistory));
-        localStorage.setItem("kademia_profile", JSON.stringify(result.profile));
+        localStorage.setItem("kademia_profile", JSON.stringify(mergedProfile));
         localStorage.setItem("kademia_workout_data", JSON.stringify(cleanWorkoutData));
       }
     });
