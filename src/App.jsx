@@ -200,10 +200,10 @@ export default function App() {
   const [profile, setProfile] = useState(() => {
     try {
       const saved = localStorage.getItem("kademia_profile");
-      return saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "", secondaryColor: "#00F0FF" };
+      return saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "", secondaryColor: "" };
     } catch (e) {
       console.error("Erro ao carregar profile:", e);
-      return { name: "Wagner", weight: "", height: "", secondaryColor: "#00F0FF" };
+      return { name: "Wagner", weight: "", height: "", secondaryColor: "" };
     }
   });
 
@@ -218,24 +218,42 @@ export default function App() {
     }
   });
 
-  // Apply custom secondary color to CSS variables
+  // Default luminous green color based on active theme
+  const defaultGreen = theme === "dark" ? "#ADFF2F" : "#008A47";
+  const activeUserColor = profile?.secondaryColor || defaultGreen;
+
+  // Apply custom accent color to all luminous green CSS variables
   useEffect(() => {
-    if (profile && profile.secondaryColor) {
-      document.documentElement.style.setProperty("--accent-secondary", profile.secondaryColor);
-      const cleanHex = profile.secondaryColor.replace("#", "");
-      let glow = "rgba(0, 240, 255, 0.18)";
-      if (cleanHex.length === 6) {
-        const r = parseInt(cleanHex.substring(0, 2), 16);
-        const g = parseInt(cleanHex.substring(2, 4), 16);
-        const b = parseInt(cleanHex.substring(4, 6), 16);
-        glow = `rgba(${r}, ${g}, ${b}, 0.18)`;
-      }
-      document.documentElement.style.setProperty("--accent-secondary-glow", glow);
-    } else {
-      document.documentElement.style.removeProperty("--accent-secondary");
-      document.documentElement.style.removeProperty("--accent-secondary-glow");
+    const color = activeUserColor;
+    document.documentElement.style.setProperty("--accent-purple", color);
+    document.documentElement.style.setProperty("--accent-lime", color);
+    document.documentElement.style.setProperty("--border-focus", color);
+    document.documentElement.style.setProperty("--status-success", color);
+    document.documentElement.style.setProperty("--clay-bg-primary", color);
+    document.documentElement.style.setProperty("--accent-secondary", color);
+
+    const cleanHex = color.replace("#", "");
+    if (cleanHex.length === 6) {
+      const r = parseInt(cleanHex.substring(0, 2), 16);
+      const g = parseInt(cleanHex.substring(2, 4), 16);
+      const b = parseInt(cleanHex.substring(4, 6), 16);
+
+      document.documentElement.style.setProperty("--accent-purple-glow", `rgba(${r}, ${g}, ${b}, 0.12)`);
+      document.documentElement.style.setProperty("--accent-lime-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
+      document.documentElement.style.setProperty("--accent-secondary-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
+      document.documentElement.style.setProperty("--border-hover", `rgba(${r}, ${g}, ${b}, 0.25)`);
+      document.documentElement.style.setProperty("--accent-active", `rgba(${r}, ${g}, ${b}, 0.2)`);
+      document.documentElement.style.setProperty("--glass-border-hover", `rgba(${r}, ${g}, ${b}, 0.35)`);
+      document.documentElement.style.setProperty("--pulsing-shadow", `rgba(${r}, ${g}, ${b}, 0.4)`);
+      document.documentElement.style.setProperty("--pulsing-shadow-start", `rgba(${r}, ${g}, ${b}, 0.7)`);
+
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      document.documentElement.style.setProperty(
+        "--color-on-accent",
+        luminance > 0.55 ? "#071200" : "#ffffff"
+      );
     }
-  }, [profile?.secondaryColor]);
+  }, [activeUserColor, theme]);
 
   // Google Sync Settings State
   const [googleSyncSettings, setGoogleSyncSettings] = useState(() => {

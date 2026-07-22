@@ -49,14 +49,14 @@ export default function Settings({
   onClearHistory,
   syncProps
 }) {
-  const defaultColor = theme === "dark" ? "#00F0FF" : "#008a47";
+  const defaultGreen = theme === "dark" ? "#ADFF2F" : "#008A47";
 
   // Local profile inputs
   const [name, setName] = useState(profile.name || "");
   const [weight, setWeight] = useState(profile.weight || "");
   const [height, setHeight] = useState(profile.height || "");
   const [secondaryColor, setSecondaryColor] = useState(
-    profile.secondaryColor || defaultColor
+    profile.secondaryColor || defaultGreen
   );
   
   // UI states
@@ -75,23 +75,43 @@ export default function Settings({
     setName(profile.name || "");
     setWeight(profile.weight || "");
     setHeight(profile.height || "");
-    setSecondaryColor(profile.secondaryColor || defaultColor);
-  }, [profile, defaultColor]);
+    setSecondaryColor(profile.secondaryColor || defaultGreen);
+  }, [profile, defaultGreen]);
 
   const handleSelectColor = (hex) => {
     setSecondaryColor(hex);
+    // Apply live feedback immediately
+    document.documentElement.style.setProperty("--accent-purple", hex);
+    document.documentElement.style.setProperty("--accent-lime", hex);
+    document.documentElement.style.setProperty("--border-focus", hex);
+    document.documentElement.style.setProperty("--status-success", hex);
+    document.documentElement.style.setProperty("--clay-bg-primary", hex);
     document.documentElement.style.setProperty("--accent-secondary", hex);
+
     const cleanHex = hex.replace("#", "");
     if (cleanHex.length === 6) {
       const r = parseInt(cleanHex.substring(0, 2), 16);
       const g = parseInt(cleanHex.substring(2, 4), 16);
       const b = parseInt(cleanHex.substring(4, 6), 16);
+
+      document.documentElement.style.setProperty("--accent-purple-glow", `rgba(${r}, ${g}, ${b}, 0.12)`);
+      document.documentElement.style.setProperty("--accent-lime-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
       document.documentElement.style.setProperty("--accent-secondary-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
+      document.documentElement.style.setProperty("--border-hover", `rgba(${r}, ${g}, ${b}, 0.25)`);
+      document.documentElement.style.setProperty("--accent-active", `rgba(${r}, ${g}, ${b}, 0.2)`);
+      document.documentElement.style.setProperty("--glass-border-hover", `rgba(${r}, ${g}, ${b}, 0.35)`);
+      document.documentElement.style.setProperty("--pulsing-shadow", `rgba(${r}, ${g}, ${b}, 0.4)`);
+
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      document.documentElement.style.setProperty(
+        "--color-on-accent",
+        luminance > 0.55 ? "#071200" : "#ffffff"
+      );
     }
   };
 
   const handleResetColor = () => {
-    handleSelectColor(defaultColor);
+    handleSelectColor(defaultGreen);
   };
 
   const handleSaveProfile = (e) => {
@@ -425,41 +445,75 @@ export default function Settings({
             </p>
 
             <div className="color-swatches-grid">
-              {PRESET_COLORS.map((preset) => (
-                <button
-                  key={preset.hex}
-                  type="button"
-                  className={`color-swatch-btn ${secondaryColor.toLowerCase() === preset.hex.toLowerCase() ? "active" : ""}`}
-                  style={{ 
-                    backgroundColor: preset.hex,
-                    "--swatch-glow": `${preset.hex}66`
-                  }}
-                  onClick={() => handleSelectColor(preset.hex)}
-                  title={preset.name}
-                >
-                  {secondaryColor.toLowerCase() === preset.hex.toLowerCase() && (
-                    <CheckIcon size={16} className="color-swatch-check" />
-                  )}
-                </button>
-              ))}
-
-              {/* Custom Color Wheel Button */}
-              <div 
-                className={`custom-color-wrapper ${!PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) ? "active" : ""}`}
-                title="Cor personalizada..."
+              {/* 1ª Bolinha: Verde Luminoso (Padrão) */}
+              <button
+                type="button"
+                className={`color-swatch-btn ${secondaryColor.toLowerCase() === defaultGreen.toLowerCase() ? "active" : ""}`}
+                style={{ 
+                  backgroundColor: defaultGreen,
+                  "--swatch-glow": `${defaultGreen}66`
+                }}
+                onClick={() => handleSelectColor(defaultGreen)}
+                title="Verde Luminoso (Padrão)"
               >
-                <div className="custom-color-inner" style={{ backgroundColor: secondaryColor }}>
-                  {!PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) && (
+                {secondaryColor.toLowerCase() === defaultGreen.toLowerCase() && (
+                  <CheckIcon size={16} className="color-swatch-check" />
+                )}
+              </button>
+
+              {/* 2ª Bolinha: Cor Personalizada (Com anel degradê arco-íris) */}
+              <div 
+                className={`custom-color-wrapper ${
+                  secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
+                  !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase())
+                    ? "active"
+                    : ""
+                }`}
+                title="Escolher cor personalizada..."
+              >
+                <div 
+                  className="custom-color-inner" 
+                  style={{ 
+                    backgroundColor: secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
+                    !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase())
+                      ? secondaryColor
+                      : "transparent" 
+                  }}
+                >
+                  {secondaryColor.toLowerCase() !== defaultGreen.toLowerCase() &&
+                   !PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) && (
                     <CheckIcon size={16} className="color-swatch-check" />
                   )}
                 </div>
                 <input 
                   type="color" 
-                  value={secondaryColor} 
+                  value={secondaryColor || defaultGreen} 
                   onChange={(e) => handleSelectColor(e.target.value)}
                   className="custom-color-input"
                 />
               </div>
+
+              {/* Demais Bolinhas: Cores Predefinidas */}
+              {PRESET_COLORS.map((preset) => {
+                const isActive = secondaryColor.toLowerCase() === preset.hex.toLowerCase() && secondaryColor.toLowerCase() !== defaultGreen.toLowerCase();
+                return (
+                  <button
+                    key={preset.hex}
+                    type="button"
+                    className={`color-swatch-btn ${isActive ? "active" : ""}`}
+                    style={{ 
+                      backgroundColor: preset.hex,
+                      "--swatch-glow": `${preset.hex}66`
+                    }}
+                    onClick={() => handleSelectColor(preset.hex)}
+                    title={preset.name}
+                  >
+                    {isActive && (
+                      <CheckIcon size={16} className="color-swatch-check" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             {/* Live Interactive Preview Box */}
