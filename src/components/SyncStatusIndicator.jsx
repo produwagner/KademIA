@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { CloudIcon, SyncIcon } from "./Icons";
 
 export default function SyncStatusIndicator({ status, lastSync, isOnline, onSync }) {
+  return null;
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
