@@ -74,6 +74,14 @@ export default function Settings({
     setSecondaryColor(hex);
     // Apply live feedback immediately across body and html elements
     applyAccentColorToDOM(hex);
+    // Persist color selection immediately so navigating away retains the chosen color option
+    onUpdateProfile({ 
+      ...profile,
+      name,
+      weight: weight ? parseFloat(weight) : "", 
+      height: height ? parseFloat(height) : "",
+      secondaryColor: hex
+    });
   };
 
   const handleResetColor = () => {
