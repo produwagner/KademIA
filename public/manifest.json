@@ -4,8 +4,8 @@
   "description": "Seu acompanhador de treinos de hipertrofia.",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#f8f9fa",
-  "theme_color": "#137333",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
   "orientation": "portrait",
   "icons": [
     {
