@@ -125,8 +125,16 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
             </div>
 
             <p className="landing-description">
-              Gerencie suas rotinas ABCD, registre cargas em tempo real e utilize o timer de descanso inteligente offline de forma simples e rápida.
+              Gerencie suas rotinas ABCD, registre cargas em tempo real e utilize o timer de descanso inteligente de forma simples e rápida.
             </p>
+
+            {/* Feature Chips */}
+            <div className="landing-features">
+              <span className="landing-chip">⚡ Registro de Cargas</span>
+              <span className="landing-chip">⏱️ Timer Inteligente</span>
+              <span className="landing-chip">📋 Rotinas ABCD</span>
+              <span className="landing-chip">📱 PWA Instalável</span>
+            </div>
 
             <div className="landing-actions">
               {/* Always show the Install button on landing page */}
@@ -140,7 +148,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
             </div>
 
             <div className="landing-footer">
-              Ficha ABCD Inteligente • Funciona Offline
+              Ficha ABCD Inteligente
             </div>
           </>
         )}
@@ -219,20 +227,27 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
 
         .landing-content {
           width: 100%;
-          max-width: 400px;
-          padding: 40px 30px;
+          max-width: 420px;
+          padding: 42px 32px;
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          border-radius: 28px; /* Google-like rounded container */
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+          background: rgba(22, 27, 34, 0.75);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: 28px;
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(163, 230, 53, 0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .landing-content:hover {
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(163, 230, 53, 0.12);
         }
 
         .landing-logo-wrapper {
-          margin-bottom: 30px;
+          margin-bottom: 24px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -276,7 +291,39 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           font-size: 0.9rem;
           color: var(--color-text-secondary);
           line-height: 1.5;
-          margin-bottom: 35px;
+          margin-bottom: 20px;
+        }
+
+        /* Item 3: Destaques de Recursos (Chips) */
+        .landing-features {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 8px;
+          margin-bottom: 28px;
+          width: 100%;
+        }
+
+        .landing-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 14px;
+          font-size: 0.78rem;
+          font-weight: 600;
+          color: #e2e8f0;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 100px;
+          backdrop-filter: blur(4px);
+          transition: all 0.2s ease;
+        }
+
+        .landing-chip:hover {
+          background: rgba(163, 230, 53, 0.12);
+          border-color: rgba(163, 230, 53, 0.35);
+          color: #a3e635;
+          transform: translateY(-1px);
         }
 
         .landing-actions {
@@ -284,7 +331,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          margin-bottom: 30px;
+          margin-bottom: 28px;
         }
 
         .btn-large {
@@ -292,6 +339,33 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
           padding: 14px;
           font-size: 1rem;
           border-radius: 100px;
+        }
+
+        .landing-actions .btn-primary {
+          box-shadow: 0 4px 16px rgba(163, 230, 53, 0.25);
+          transition: all 0.2s ease;
+        }
+
+        .landing-actions .btn-primary:hover {
+          box-shadow: 0 6px 22px rgba(163, 230, 53, 0.4);
+          transform: translateY(-1px);
+        }
+
+        /* Item 4: Contraste do Botão Secundário */
+        .landing-actions .btn-secondary {
+          background: rgba(255, 255, 255, 0.08) !important;
+          border: 1px solid rgba(255, 255, 255, 0.2) !important;
+          color: #f8fafc !important;
+          font-weight: 600;
+          transition: all 0.2s ease;
+        }
+
+        .landing-actions .btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.16) !important;
+          border-color: rgba(255, 255, 255, 0.4) !important;
+          color: #ffffff !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
         }
 
         .landing-footer {
