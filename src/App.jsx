@@ -200,10 +200,10 @@ export default function App() {
   const [profile, setProfile] = useState(() => {
     try {
       const saved = localStorage.getItem("kademia_profile");
-      return saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "" };
+      return saved ? JSON.parse(saved) : { name: "Wagner", weight: "", height: "", secondaryColor: "#00F0FF" };
     } catch (e) {
       console.error("Erro ao carregar profile:", e);
-      return { name: "Wagner", weight: "", height: "" };
+      return { name: "Wagner", weight: "", height: "", secondaryColor: "#00F0FF" };
     }
   });
 
@@ -217,6 +217,25 @@ export default function App() {
       return [];
     }
   });
+
+  // Apply custom secondary color to CSS variables
+  useEffect(() => {
+    if (profile && profile.secondaryColor) {
+      document.documentElement.style.setProperty("--accent-secondary", profile.secondaryColor);
+      const cleanHex = profile.secondaryColor.replace("#", "");
+      let glow = "rgba(0, 240, 255, 0.18)";
+      if (cleanHex.length === 6) {
+        const r = parseInt(cleanHex.substring(0, 2), 16);
+        const g = parseInt(cleanHex.substring(2, 4), 16);
+        const b = parseInt(cleanHex.substring(4, 6), 16);
+        glow = `rgba(${r}, ${g}, ${b}, 0.18)`;
+      }
+      document.documentElement.style.setProperty("--accent-secondary-glow", glow);
+    } else {
+      document.documentElement.style.removeProperty("--accent-secondary");
+      document.documentElement.style.removeProperty("--accent-secondary-glow");
+    }
+  }, [profile?.secondaryColor]);
 
   // Google Sync Settings State
   const [googleSyncSettings, setGoogleSyncSettings] = useState(() => {

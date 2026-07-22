@@ -6,7 +6,9 @@ import {
   CheckCircleIcon, 
   SunIcon, 
   MoonIcon,
-  InfoIcon
+  InfoIcon,
+  PaletteIcon,
+  CheckIcon
 } from "./Icons";
 import SyncStatusIndicator from "./SyncStatusIndicator";
 import { 
@@ -18,6 +20,17 @@ import {
   performFullSync
 } from "../services/googleDriveService";
 import { GOOGLE_CLIENT_ID } from "../config";
+
+const PRESET_COLORS = [
+  { hex: "#00F0FF", name: "Ciano Neon" },
+  { hex: "#A855F7", name: "Roxo Elétrico" },
+  { hex: "#10B981", name: "Verde Esmeralda" },
+  { hex: "#FF6B00", name: "Laranja Vibrante" },
+  { hex: "#FF2E93", name: "Rosa Neon" },
+  { hex: "#3B82F6", name: "Azul Cobalto" },
+  { hex: "#F59E0B", name: "Âmbar Dourado" },
+  { hex: "#EF4444", name: "Vermelho Carmim" }
+];
 
 export default function Settings({
   profile,
@@ -36,10 +49,15 @@ export default function Settings({
   onClearHistory,
   syncProps
 }) {
+  const defaultColor = theme === "dark" ? "#00F0FF" : "#008a47";
+
   // Local profile inputs
   const [name, setName] = useState(profile.name || "");
   const [weight, setWeight] = useState(profile.weight || "");
   const [height, setHeight] = useState(profile.height || "");
+  const [secondaryColor, setSecondaryColor] = useState(
+    profile.secondaryColor || defaultColor
+  );
   
   // UI states
   const [showHelp, setShowHelp] = useState(false);
@@ -57,14 +75,32 @@ export default function Settings({
     setName(profile.name || "");
     setWeight(profile.weight || "");
     setHeight(profile.height || "");
-  }, [profile]);
+    setSecondaryColor(profile.secondaryColor || defaultColor);
+  }, [profile, defaultColor]);
+
+  const handleSelectColor = (hex) => {
+    setSecondaryColor(hex);
+    document.documentElement.style.setProperty("--accent-secondary", hex);
+    const cleanHex = hex.replace("#", "");
+    if (cleanHex.length === 6) {
+      const r = parseInt(cleanHex.substring(0, 2), 16);
+      const g = parseInt(cleanHex.substring(2, 4), 16);
+      const b = parseInt(cleanHex.substring(4, 6), 16);
+      document.documentElement.style.setProperty("--accent-secondary-glow", `rgba(${r}, ${g}, ${b}, 0.18)`);
+    }
+  };
+
+  const handleResetColor = () => {
+    handleSelectColor(defaultColor);
+  };
 
   const handleSaveProfile = (e) => {
     e.preventDefault();
     onUpdateProfile({ 
       name, 
       weight: weight ? parseFloat(weight) : "", 
-      height: height ? parseFloat(height) : "" 
+      height: height ? parseFloat(height) : "",
+      secondaryColor
     });
     alert("Perfil atualizado com sucesso!");
   };
@@ -359,7 +395,95 @@ export default function Settings({
             </div>
           </div>
 
-          <button type="submit" className="btn btn-lime submit-profile-btn">
+          {/* Minimalist Secondary Color Picker */}
+          <div className="secondary-color-section">
+            <div className="color-picker-header">
+              <div className="color-picker-title-group">
+                <PaletteIcon size={18} className="text-secondary-accent" />
+                <span className="color-picker-title">Cor Secundária do App</span>
+              </div>
+              <div className="color-header-actions">
+                <span className="color-value-badge">
+                  <span className="color-preview-dot" style={{ backgroundColor: secondaryColor }} />
+                  {secondaryColor.toUpperCase()}
+                </span>
+                {secondaryColor.toLowerCase() !== defaultColor.toLowerCase() && (
+                  <button 
+                    type="button" 
+                    className="btn-reset-color"
+                    onClick={handleResetColor}
+                    title="Restaurar cor padrão"
+                  >
+                    Restaurar Padrão
+                  </button>
+                )}
+              </div>
+            </div>
+            
+            <p className="sync-info-text" style={{ marginBottom: "10px", fontSize: "0.85rem" }}>
+              Escolha uma cor de destaque secundária para personalizar badges, realces e detalhes do aplicativo.
+            </p>
+
+            <div className="color-swatches-grid">
+              {PRESET_COLORS.map((preset) => (
+                <button
+                  key={preset.hex}
+                  type="button"
+                  className={`color-swatch-btn ${secondaryColor.toLowerCase() === preset.hex.toLowerCase() ? "active" : ""}`}
+                  style={{ 
+                    backgroundColor: preset.hex,
+                    "--swatch-glow": `${preset.hex}66`
+                  }}
+                  onClick={() => handleSelectColor(preset.hex)}
+                  title={preset.name}
+                >
+                  {secondaryColor.toLowerCase() === preset.hex.toLowerCase() && (
+                    <CheckIcon size={16} className="color-swatch-check" />
+                  )}
+                </button>
+              ))}
+
+              {/* Custom Color Wheel Button */}
+              <div 
+                className={`custom-color-wrapper ${!PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) ? "active" : ""}`}
+                title="Cor personalizada..."
+              >
+                <div className="custom-color-inner" style={{ backgroundColor: secondaryColor }}>
+                  {!PRESET_COLORS.some(p => p.hex.toLowerCase() === secondaryColor.toLowerCase()) && (
+                    <CheckIcon size={16} className="color-swatch-check" />
+                  )}
+                </div>
+                <input 
+                  type="color" 
+                  value={secondaryColor} 
+                  onChange={(e) => handleSelectColor(e.target.value)}
+                  className="custom-color-input"
+                />
+              </div>
+            </div>
+
+            {/* Live Interactive Preview Box */}
+            <div className="color-preview-demo-box">
+              <span className="preview-label" style={{ fontSize: "0.85rem", color: "var(--color-text-secondary)" }}>
+                Pré-visualização do destaque:
+              </span>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                <span className="preview-badge-secondary">
+                  <PaletteIcon size={14} /> Tag Secundária
+                </span>
+                <button 
+                  type="button" 
+                  className="btn btn-secondary" 
+                  style={{ padding: "6px 14px", fontSize: "0.82rem" }}
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Botão Secundário
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" className="btn btn-lime submit-profile-btn" style={{ marginTop: "20px" }}>
             <UserIcon size={18} /> Salvar Alterações
           </button>
         </form>
