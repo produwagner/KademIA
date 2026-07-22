@@ -565,28 +565,6 @@ export default function Settings({
         </div>
       </section>
 
-      {/* Backup Settings Card */}
-      <section className="settings-section glass">
-        <h3 className="section-title">Backup de Segurança (Manual)</h3>
-        <p className="sync-info-text" style={{ marginBottom: "14px", marginTop: "6px" }}>
-          Baixe um arquivo com todos os seus dados locais ou restaure um backup anterior. Útil para transferir dados ou salvar uma cópia extra offline.
-        </p>
-        <div className="backup-actions-row">
-          <button type="button" className="btn btn-secondary backup-btn" onClick={handleExportBackup}>
-            Exportar Backup (JSON)
-          </button>
-          
-          <label className="btn btn-primary backup-btn backup-import-label">
-            Importar Backup (JSON)
-            <input 
-              type="file" 
-              accept=".json" 
-              onChange={handleImportBackupFile} 
-              style={{ display: "none" }}
-            />
-          </label>
-        </div>
-      </section>
 
       {/* Danger Zone Card */}
       <section className="settings-section glass danger-zone-card">
