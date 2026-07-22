@@ -125,14 +125,14 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
             </div>
 
             <p className="landing-description">
-              Gerencie suas rotinas ABCD, registre cargas em tempo real e utilize o timer de descanso inteligente de forma simples e rápida.
+              Gerencie suas rotinas de treino, registre cargas em tempo real e utilize o timer de descanso inteligente de forma simples e rápida.
             </p>
 
             {/* Feature Chips */}
             <div className="landing-features">
               <span className="landing-chip">⚡ Registro de Cargas</span>
               <span className="landing-chip">⏱️ Timer Inteligente</span>
-              <span className="landing-chip">📋 Rotinas ABCD</span>
+              <span className="landing-chip">📋 Rotinas de Treino</span>
               <span className="landing-chip">📱 PWA Instalável</span>
             </div>
 
@@ -148,7 +148,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
             </div>
 
             <div className="landing-footer">
-              Ficha ABCD Inteligente
+              Ficha de Treino Inteligente
             </div>
           </>
         )}

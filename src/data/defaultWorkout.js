@@ -1,6 +1,6 @@
 export const defaultWorkout = {
   id: "default-abcd",
-  name: "Ficha ABCD - KademIA Personalizada",
+  name: "Ficha de Treino - KademIA Personalizada",
   objective: "Hipertrofia & Recomposição",
   routines: [
     {
