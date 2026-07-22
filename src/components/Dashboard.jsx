@@ -1,5 +1,5 @@
 import React from "react";
-import { BarbellIcon, TrophyIcon, HistoryIcon, EditIcon } from "./Icons";
+import { BarbellIcon, TrophyIcon, HistoryIcon, EditIcon, PlayIcon } from "./Icons";
 import SyncStatusIndicator from "./SyncStatusIndicator";
 
 export default function Dashboard({ workoutData, history, onStartWorkout, onSetActiveTab, profile, syncProps }) {
@@ -154,7 +154,7 @@ export default function Dashboard({ workoutData, history, onStartWorkout, onSetA
               </div>
 
               <button className="btn btn-lime start-routine-btn" onClick={() => onStartWorkout(routine)}>
-                <BarbellIcon size={18} /> Iniciar Treino {routine.id}
+                <PlayIcon size={18} /> Iniciar Treino {routine.id}
               </button>
             </div>
           ))}

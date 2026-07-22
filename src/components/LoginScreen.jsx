@@ -253,7 +253,7 @@ export default function LoginScreen({
         }
 
         .login-logo-icon {
-          color: white;
+          color: var(--color-on-accent);
         }
 
         .login-title {

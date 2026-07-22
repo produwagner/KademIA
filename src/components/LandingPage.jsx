@@ -266,7 +266,7 @@ export default function LandingPage({ deferredPrompt, onEnterApp }) {
         }
 
         .landing-logo-icon {
-          color: white;
+          color: var(--color-on-accent);
         }
 
         .landing-title {
